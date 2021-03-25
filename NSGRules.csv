@@ -1,4 +1,4 @@
 nsgName,ruleName,description,protocol,sourcePortRange,destinationPortRange,sourceAddressPrefix,destinationAddressPrefix,access,priority,direction
 NSG1,Rule1,Allow HTTPS Inbound,Tcp,*,443,*,*,Allow,100,Inbound
-NSG1,Rule2,Allow HTTP Inbound,Tcp,*,80,*,*,Allow,101,Inbound
+NSG2,Rule2,Allow HTTP Inbound,Tcp,*,80,*,*,Allow,101,Inbound
 NSG2,Rule1,Allow HTTPS Inbound,Tcp,*,443,*,*,Allow,100,Inbound

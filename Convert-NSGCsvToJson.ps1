@@ -1,31 +1,16 @@
 $rules = Import-Csv .\NSGRules.csv
 
 $NSGs = $rules | Group-Object -Property nsgname
-foreach ($NSG in $NSGs) {
-    $NSG
-    $obj = foreach ($rule in $NSG.Group) {
-        [PSCustomObject]@{
-            name = $rule.ruleName
-            properties = ($rule | Select-Object -Property * -ExcludeProperty nsgName,ruleName)
-        }
-    }
-    $obj | ConvertTo-Json
-}
-    
-
-
-
-
-
-<#     [PSCustomObject]@{
-        name = $NSG.ruleName
-        properties = ($NSG | Select-Object -Property * -ExcludeProperty nsgName,ruleName)
-    }
-}
-$rules | Where-Object {$_.nsgname -eq "NSG1"} | `
-ForEach-Object { 
+$obj2 = foreach ($NSG in $NSGs) {
     [PSCustomObject]@{
-        name = $_.ruleName
-        properties = ($_ | Select-Object -Property * -ExcludeProperty nsgName,ruleName)
+        NSGName = $NSG.Name
+        securityRules = @(foreach ($rule in $NSG.Group) {
+            [PSCustomObject]@{
+                name = $rule.ruleName
+                properties = ($rule | Select-Object -Property * -ExcludeProperty nsgName,ruleName)
+            }
+        })
+    
     }
-} | ConvertTo-Json #>
+}
+$obj2 | ConvertTo-Json -Depth 4 | Out-File ./rules.json
