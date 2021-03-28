@@ -6,3 +6,4 @@ NSG3,Rule2,Allow HTTP Inbound,Tcp,*,80,*,*,Allow,101,Inbound
 NSG3,Rule1,Allow HTTPS Inbound,Tcp,*,443,*,*,Allow,100,Inbound
 NSG4,Rule2,Allow HTTP Inbound,Tcp,*,80,*,*,Allow,101,Inbound
 NSG4,Rule1,Allow HTTPS Inbound,Tcp,*,443,*,*,Allow,100,Inbound
+NSG5,Rule1,Allow HTTPS Inbound,Tcp,*,443,*,*,Allow,100,Inbound
