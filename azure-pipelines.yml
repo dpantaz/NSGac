@@ -33,5 +33,6 @@ steps:
     csmFile: 'azuredeploy.json'
     overrideParameters: '-NSGs $(rulesvar)'
     deploymentMode: 'Incremental'
+    deploymentName: 'deploy_$(Date:yyyyMMdd)'
 
 
