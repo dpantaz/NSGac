@@ -10,23 +10,24 @@ pool:
   vmImage: windows-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+- powershell: 
+    Convert-NSGCsvToJson.ps1
+  displayName: 'Create JSON rules'
 - powershell: | 
     $rules = Get-Content rules.json
     echo "##vso[task.setvariable variable=rulesvar]$rules"
+  displayName: 'Assign JSON rules to variable'
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
-    azureResourceManagerConnection: 'MSDN Platforms Subscription (22574fd0-10d3-4f1c-994c-320dfd7d6e2e)'
-    subscriptionId: '22574fd0-10d3-4f1c-994c-320dfd7d6e2e'
+    azureResourceManagerConnection: 'MSDN Platforms Subscription'
+    subscriptionId: '$(subscriptionId)'
     action: 'Create Or Update Resource Group'
-    resourceGroupName: 'testNSG'
+    resourceGroupName: '$(resourceGroup)'
     location: 'West Europe'
     templateLocation: 'Linked artifact'
     csmFile: 'azuredeploy.json'
