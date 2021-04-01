@@ -1,0 +1,65 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "westeurope"
+        },
+        "NSGs": {
+            "value": [
+                {
+                    "NSGName": "NSG1",
+                    "securityRules": [
+                        {
+                            "name": "Rule1",
+                            "properties": {
+                                "description": "Allow HTTPS Inbound",
+                                "protocol": "Tcp",
+                                "sourcePortRange": "*",
+                                "destinationPortRange": "443",
+                                "sourceAddressPrefix": "*",
+                                "destinationAddressPrefix": "*",
+                                "access": "Allow",
+                                "priority": "100",
+                                "direction": "Inbound"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "NSGName": "NSG2",
+                    "securityRules": [
+                        {
+                            "name": "Rule2",
+                            "properties": {
+                                "description": "Allow HTTP Inbound",
+                                "protocol": "Tcp",
+                                "sourcePortRange": "*",
+                                "destinationPortRange": "80",
+                                "sourceAddressPrefix": "*",
+                                "destinationAddressPrefix": "*",
+                                "access": "Allow",
+                                "priority": "101",
+                                "direction": "Inbound"
+                            }
+                        },
+                        {
+                            "name": "Rule1",
+                            "properties": {
+                                "description": "Allow HTTPS Inbound",
+                                "protocol": "Tcp",
+                                "sourcePortRange": "*",
+                                "destinationPortRange": "443",
+                                "sourceAddressPrefix": "*",
+                                "destinationAddressPrefix": "*",
+                                "access": "Allow",
+                                "priority": "100",
+                                "direction": "Inbound"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

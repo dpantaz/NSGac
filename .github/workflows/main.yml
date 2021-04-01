@@ -47,6 +47,6 @@ jobs:
           # Provide the name of a resource group, only required for resource Group deployments.
           resourceGroupName: testNSG
           # Specify the path or URL to the Azure Resource Manager template.
-          template: ./azuredeploy.json
+          template: ./azuredeploy2.json
           # Supply deployment parameter values.
-          parameters: location=westeurope NSGs=${{ steps.output.outputs.new_value }}
+          parameters: ./azuredeploy2.parameters.json
