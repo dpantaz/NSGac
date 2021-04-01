@@ -15,7 +15,7 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 - powershell: 
-    Convert-NSGCsvToJson.ps1
+    .\Convert-NSGCsvToJson.ps1
   displayName: 'Create JSON rules'
 - powershell: | 
     $rules = Get-Content rules.json
