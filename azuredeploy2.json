@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string",
+            "metadata": {
+                "description": "The location"
+            }
+        },
+        "NSGs": {
+            "type": "array",
+            "metadata": {
+                "description": "The rules"
+            }
+        }
+    },
+    "functions": [],
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2020-05-01",
+            "name": "[concat(parameters('NSGs')[copyIndex()].NSGName)]",
+            "location": "[parameters('Location')]",
+            "copy": {
+                "name": "NSGs",
+                "count": "[length(parameters('NSGs'))]"
+            },
+            "properties": {
+                "securityRules": "[parameters('NSGs')[copyIndex()].securityRules]"
+            }
+        }
+    ],
+    "outputs": {}
+}
