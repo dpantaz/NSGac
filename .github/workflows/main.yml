@@ -49,4 +49,4 @@ jobs:
           # Specify the path or URL to the Azure Resource Manager template.
           template: ./azuredeploy.json
           # Supply deployment parameter values.
-          parameters: NSGs=${{ fromJson(steps.rules.outputs.content) }}
+          parameters: NSGs=${{fromJson(steps.rules.outputs.content)}}
