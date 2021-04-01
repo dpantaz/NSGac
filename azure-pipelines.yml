@@ -18,4 +18,20 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 - script: 
-    cat rules.json
+    $rules = Get-Content rules.json
+- script: |
+    echo "##vso[task.setvariable variable=rulesvar]$rules"
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'MSDN Platforms Subscription (22574fd0-10d3-4f1c-994c-320dfd7d6e2e)'
+    subscriptionId: '22574fd0-10d3-4f1c-994c-320dfd7d6e2e'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'testNSG'
+    location: 'West Europe'
+    templateLocation: 'Linked artifact'
+    csmFile: 'azuredeploy.json'
+    overrideParameters: '$(rulesvar)'
+    deploymentMode: 'Incremental'
+
+
