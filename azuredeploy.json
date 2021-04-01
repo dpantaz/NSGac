@@ -4,6 +4,7 @@
     "parameters": {
         "location": {
             "type": "string",
+            "defaultValue": "westeurope",
             "metadata": {
                 "description": "The location"
             }
