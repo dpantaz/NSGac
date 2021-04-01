@@ -30,11 +30,11 @@ jobs:
           # Paste output of `az ad sp create-for-rbac` as value of secret variable: AZURE_CREDENTIALS
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       # Read Security Rules from JSON file
-      - name: Read rules.json
-        id: rules
-        uses: juliangruber/read-file-action@v1
-        with:
-          path: ./rules.json
+      - name: Read NSG JSON rules
+        id: output
+        run: |
+          $file_text = Get-Content "rules.json"
+          echo "::set-output name=new_value::$file_text"
       - name: Run Script
         id: script
         run: |
@@ -52,4 +52,4 @@ jobs:
           # Specify the path or URL to the Azure Resource Manager template.
           template: ./azuredeploy.json
           # Supply deployment parameter values.
-          parameters: NSGs=${{fromJson(steps.rules.outputs.content)}}
+          parameters: NSGs=${{ steps.output.outputs.new_value }}
