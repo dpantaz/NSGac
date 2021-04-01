@@ -35,7 +35,10 @@ jobs:
         uses: juliangruber/read-file-action@v1
         with:
           path: ./rules.json
-          
+      - name: Run Script
+        id: script
+        run: |
+          cat ./rules.json
       # Runs a single command using the runners shell
       - name: Deploy Azure Resource Manager (ARM) Template
         uses: Azure/arm-deploy@v1
