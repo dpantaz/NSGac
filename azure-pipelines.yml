@@ -30,7 +30,7 @@ steps:
     location: 'West Europe'
     templateLocation: 'Linked artifact'
     csmFile: 'azuredeploy.json'
-    overrideParameters: '$(rulesvar)'
+    overrideParameters: '-NSGs $(rulesvar)'
     deploymentMode: 'Incremental'
 
 
